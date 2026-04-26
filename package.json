@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "AI-powered global news sentiment monitoring — powered by FreeNews API",
   "main": "out/main/index.js",
-  "author": "FreeNews",
+  "author": {
+    "name": "FreeNews",
+    "email": "support@freenews.site"
+  },
   "license": "MIT",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
