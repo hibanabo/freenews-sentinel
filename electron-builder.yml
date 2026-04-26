@@ -1,0 +1,50 @@
+appId: site.freenews.sentinel
+productName: FreeNews Sentinel
+copyright: Copyright © 2026 FreeNews
+
+directories:
+  buildResources: resources
+  output: dist
+
+files:
+  - out/**/*
+
+asar: true
+
+mac:
+  category: public.app-category.news
+  icon: resources/icon.icns
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+    - target: zip
+      arch: [x64, arm64]
+  artifactName: FreeNews-Sentinel-${version}-mac-${arch}.${ext}
+
+win:
+  icon: resources/icon.ico
+  target:
+    - target: nsis
+      arch: [x64]
+  artifactName: FreeNews-Sentinel-${version}-win-${arch}.${ext}
+
+linux:
+  icon: resources/icon.png
+  category: Network
+  target:
+    - target: AppImage
+      arch: [x64]
+    - target: deb
+      arch: [x64]
+  artifactName: FreeNews-Sentinel-${version}-linux-${arch}.${ext}
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: FreeNews Sentinel
+
+publish:
+  provider: github
+  releaseType: release

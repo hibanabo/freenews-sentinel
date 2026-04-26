@@ -1,0 +1,103 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            platform: mac
+          - os: windows-latest
+            platform: win
+          - os: ubuntu-latest
+            platform: linux
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build macOS
+        if: matrix.platform == 'mac'
+        run: npm run package:mac
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      - name: Build Windows
+        if: matrix.platform == 'win'
+        run: npm run package:win
+
+      - name: Build Linux
+        if: matrix.platform == 'linux'
+        run: npm run package:linux
+
+      - name: Upload macOS artifact
+        if: matrix.platform == 'mac'
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-dmg
+          path: dist/*.dmg
+
+      - name: Upload Windows artifact
+        if: matrix.platform == 'win'
+        uses: actions/upload-artifact@v4
+        with:
+          name: win-exe
+          path: dist/*.exe
+
+      - name: Upload Linux artifact
+        if: matrix.platform == 'linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-appimage
+          path: dist/*.AppImage
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*
+          body: |
+            ## FreeNews Sentinel
+
+            ### 下载安装
+            | 平台 | 文件 |
+            |------|------|
+            | macOS | `FreeNews-Sentinel-*-mac-*.dmg` |
+            | Windows | `FreeNews-Sentinel-*-win-*.exe` |
+            | Linux | `FreeNews-Sentinel-*-linux-*.AppImage` |
+
+            ### 快速开始
+            1. 下载对应平台安装包并安装
+            2. 前往 [freenews.site](https://freenews.site) 注册获取 API Key
+            3. 在「设置」页面填入 API Key 即可使用
+          draft: false
+          prerelease: false

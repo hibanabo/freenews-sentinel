@@ -1,0 +1,21 @@
+node_modules/
+out/
+dist/
+
+.DS_Store
+*.log
+*.tsbuildinfo
+
+# Local config/artifacts
+.env
+.env.*
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+# Electron user data dumps (if copied into repo accidentally)
+config.json
+
+# electron-builder artifacts
+electron-builder-effective-config.yaml
+release/
