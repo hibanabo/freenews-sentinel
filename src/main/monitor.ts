@@ -232,10 +232,15 @@ function broadcastTopicRun(topicRun: TopicRunRecord) {
 function focusMainWindowAndOpenAlert(alertId: string) {
   const win = BrowserWindow.getAllWindows()[0]
   if (!win) return
+  const needsRestore = win.isMinimized() || !win.isVisible()
   if (win.isMinimized()) win.restore()
   if (!win.isVisible()) win.show()
   win.focus()
-  win.webContents.send('open-alert-detail', { alertId })
+  // Delay slightly if window was hidden so it's fully ready before receiving IPC
+  const delay = needsRestore ? 150 : 0
+  setTimeout(() => {
+    win.webContents.send('open-alert-detail', { alertId })
+  }, delay)
 }
 
 function showAlertNotification(alert: Alert, sound: boolean, lang: 'zh' | 'en') {

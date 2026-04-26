@@ -169,9 +169,16 @@ function focusMainWindow() {
 }
 
 function emitOpenAlertDetail(alertId: string) {
-  const win = focusMainWindow()
+  const win = getMainWindow()
   if (!win) return
-  win.webContents.send('open-alert-detail', { alertId })
+  const needsRestore = win.isMinimized() || !win.isVisible()
+  if (win.isMinimized()) win.restore()
+  if (!win.isVisible()) win.show()
+  win.focus()
+  const delay = needsRestore ? 150 : 0
+  setTimeout(() => {
+    win.webContents.send('open-alert-detail', { alertId })
+  }, delay)
 }
 
 function showAlertNotification(alert: Alert, sound: boolean, icon?: string) {
