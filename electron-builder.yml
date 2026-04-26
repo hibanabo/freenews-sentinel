@@ -44,7 +44,3 @@ nsis:
   createDesktopShortcut: always
   createStartMenuShortcut: true
   shortcutName: FreeNews Sentinel
-
-publish:
-  provider: github
-  releaseType: release
