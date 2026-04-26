@@ -58,7 +58,7 @@ Most news monitoring tools are either expensive SaaS platforms or simple RSS rea
 ### Quick Start
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/freenews-sentinel.git
+git clone https://github.com/hibanabo/freenews-sentinel.git
 cd freenews-sentinel
 npm install
 npm run dev
@@ -142,7 +142,7 @@ src/
 ### 快速开始
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/freenews-sentinel.git
+git clone https://github.com/hibanabo/freenews-sentinel.git
 cd freenews-sentinel
 npm install
 npm run dev
@@ -194,7 +194,7 @@ src/
 
 ## Changelog
 
-### [1.0.0] - 2026-04-12
+### [1.0.0] - 2026-04-26
 
 - FreeNews API integration for global news monitoring
 - Topic-based keyword group management with batch operations

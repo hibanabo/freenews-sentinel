@@ -19,3 +19,7 @@ config.json
 # electron-builder artifacts
 electron-builder-effective-config.yaml
 release/
+
+# Internal planning docs
+*_PLAN.md
+*_FEATURE_PLAN.md
