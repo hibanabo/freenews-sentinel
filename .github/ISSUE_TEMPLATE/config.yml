@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions (Q&A and ideas)
+    url: https://github.com/hibanabo/freenews-sentinel/discussions
+    about: For usage questions, ideas, and general chat. Use issues only for confirmed bugs and concrete feature requests.
+  - name: 🌐 FreeNews API site
+    url: https://freenews.site
+    about: For API key, quota, or upstream news-source issues — that's a separate service, not this app.

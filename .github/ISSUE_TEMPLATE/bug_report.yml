@@ -1,0 +1,108 @@
+name: 🐛 Bug report
+description: Something isn't working — help us reproduce and fix it.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. Specific reports get fixed faster — please fill out as much as you can.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I searched existing issues and didn't find a duplicate.
+          required: true
+        - label: I'm running the latest release (or recently built from `main`).
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear, concise description of the bug.
+      placeholder: After clicking an alert notification, the app shows a blank window for 2 seconds before the dashboard appears.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Settings → enable AI Analysis with provider X
+        2. Create a topic group with keyword "tesla"
+        3. Wait for next poll
+        4. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual behavior
+      placeholder: |
+        Expected: alert window opens immediately on notification click.
+        Actual: window flashes blank for ~2s.
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - macOS (Apple Silicon)
+        - macOS (Intel)
+        - Windows 11
+        - Windows 10
+        - Linux (AppImage)
+        - Linux (other)
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: Visible in the About dialog, or `package.json` if running from source.
+      placeholder: 1.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install-source
+    attributes:
+      label: How did you install?
+      options:
+        - Downloaded release (.dmg / .exe / .AppImage)
+        - Built from source (`npm run package:*`)
+        - Running dev (`npm run dev`)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ai-provider
+    attributes:
+      label: AI provider in use
+      options:
+        - None (AI Analysis disabled)
+        - OpenAI
+        - Anthropic
+        - Local (Ollama / LM Studio / vLLM / other OpenAI-compatible)
+        - Other cloud OpenAI-compatible endpoint
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs / errors
+      description: Open DevTools (`View → Toggle DevTools` or `Cmd/Ctrl+Shift+I`) and copy any red errors from the Console tab. Redact API keys.
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Drag images here. Optional but very helpful for UI bugs.

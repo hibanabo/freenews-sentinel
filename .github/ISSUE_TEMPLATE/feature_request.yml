@@ -1,0 +1,64 @@
+name: ✨ Feature request
+description: Suggest a new capability or improvement.
+title: "[Feat]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The most useful feature requests describe a **problem** first, then a possible solution. Lead with the situation where you got stuck — not with the implementation idea.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I searched existing issues and the README Roadmap, and didn't find a duplicate.
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the situation, not the solution.
+      placeholder: I monitor 12 keywords for my fund. When the same regulator name shows up in 5 unrelated stories within an hour, I get 5 similar alerts in a row and miss the genuinely new one.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: What you've imagined. Stay open to alternatives.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives / current workaround
+      description: How are you handling this today?
+
+  - type: dropdown
+    id: persona
+    attributes:
+      label: Which use case is this for?
+      multiple: true
+      options:
+        - Trader (equities / forex)
+        - Crypto trader
+        - PR / brand monitoring
+        - Compliance / legal
+        - OSINT / national security
+        - Supply chain
+        - Journalist
+        - Tech competitive intel
+        - Generalist / personal
+        - Developer experience
+        - Other
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd be willing to open a PR for this.
+        - label: I can help test a beta build.
